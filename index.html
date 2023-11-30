@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="tags.js"></script>
+
+</head>
+<script>
+    $(document).ready(function () {
+        $("#autocomplete").autocomplete({
+            source: tags
+        });
+
+        $('#swap').click(function(){
+            $('#swapCircle').toggleClass('circleGreen');
+            });
+
+        $('[data-bs-toggle="tooltip"]').tooltip();
+    });
+
+
+    function changeColor(option) {
+        // Toggle the 'selected-option' class to maintain the color after click
+        $(option).toggleClass('selected-option');
+       
+    }
+
+    function swapColor(){
+        $('#swapCircle').toggleClass('circleGreen');
+    }
+    // Enable Bootstrap tooltips after each slide change
+    $('#cardCarousel').on('slid.bs.carousel', function () {
+        // Destroy existing tooltips before initializing new ones
+        $('[data-bs-toggle="tooltip"]').tooltip('dispose');
+
+        // Initialize tooltips on elements with 'data-bs-toggle="tooltip"'
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+
+    
+    
+    
+</script>
+<style>
+    div.gallery {
+        border: 1px solid #ccc;
+    }
+
+    div.gallery:hover {
+        border: 1px solid #777;
+    }
+
+    div.gallery img {
+        width: 100%;
+        height: auto;
+    }
+
+    div.desc {
+        padding: 15px;
+        text-align: center;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .responsive {
+        padding: 0 6px;
+        float: left;
+        width: 24.99999%;
+    }
+
+    @media only screen and (max-width: 700px) {
+        .responsive {
+            width: 49.99999%;
+            margin: 6px 0;
+        }
+    }
+
+    @media only screen and (max-width: 500px) {
+        .responsive {
+            width: 100%;
+        }
+    }
+
+    .clearfix:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .selected-option {
+            background-color: lightblue !important;
+        }
+
+        .circle {
+            position: relative;
+             /* Adjust the distance between the icon and the circle */
+            justify-content: center;
+            align-items: center;
+            background-color: #7d7d7d; /* Circle color */
+            border-radius: 50%;
+            width: 20px; /* Adjust the diameter of the circle */
+            height: 20px; /* Adjust the diameter of the circle */
+            display: flex;
+            
+        }
+
+        .icon-container {
+            position: relative;
+            width: 50px; /* Adjust the width of the circle */
+        }
+        .circleGreen{
+            position: relative;
+             /* Adjust the distance between the icon and the circle */
+            justify-content: center;
+            align-items: center;
+            background-color: #6be87c; /* Circle color */
+            border-radius: 50%;
+            width: 20px; /* Adjust the diameter of the circle */
+            height: 20px; /* Adjust the diameter of the circle */
+            display: flex;
+        }
+        .white{
+            color:white;
+            background-color: white;
+        }
+
+        
+
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">SOI Learning Portal</a>
+            <button class="navbar-toggler white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler">
+                <span class="navbar-togglericon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">About</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Courses
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">HTML</a>
+                            <a class="dropdown-item" href="#">CSS</a>
+                            <a class="dropdown-item" href="#">PHP</a>
+                            <a class="dropdown-item" href="#">JavaScript</a>
+                            <a class="dropdown-item" href="#">Python</a>
+                            <a class="dropdown-item" href="#">Java</a>
+                            <a class="dropdown-item" href="#">iOS</a>
+                            <a class="dropdown-item" href="#">React</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+
+                    <li>
+                        <form class="d-flex ms-auto" id="autocomplete">
+                            <input class="form-control me-2" id="autocomplete" type="search" placeholder="Search"
+                                aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </li>
+                </ul>
+                
+            </div>
+            <ul class="navbar-nav ml-auto p-2">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownMail" role="button"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="bi bi-envelope"></i></a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMail">
+                        <a class="dropdown-item" onclick="changeColor(this)">Message 1</a>
+                        <a class="dropdown-item" onclick="changeColor(this)">Message 2</a>
+                        <a class="dropdown-item" onclick="changeColor(this)">Message 3</a>
+                        <a class="dropdown-item" onclick="changeColor(this)">Message 4</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <div class="circleGreen" id="swapCircle" >
+                            <i class="bi bi-person-circle" id="swap" onclick="swapColor()"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid bg-success bg-gradient shadow">
+        <div class="container pt-5">
+            <div class="row text-light pt-5">
+                <div class="col-sm-7 pb-5">
+                    <h1 class="col-sm-5">Welcome to SOI Learning Portal</h1>
+                    <p class="lead col-sm-5">Expertly crafted courses that best fit your learning needs and preferences
+                    </p>
+                    <button class="bg-dark text-white" style="border-radius: 7%;">Browse Courses</button>
+                    <button style="border-radius: 7%;">Be an instructor</button>
+                </div>
+                <div class="col-sm-5 pb-5 ">
+                    <img src="https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        width="300vw" height="200vh">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid bg-dark">
+        <div class="container pt-5 pb-5">
+            <div class="row ">
+                <div class="row">
+
+                    <div class="col-4 text-white text-center">
+                        <i class="bi bi-book-fill"></i><br>
+                        <h5>158 Online Courses</h5>
+                        <p>Enjoy a variety of fresh topics</p>
+                    </div>
+
+                    <div class="col-4 text-white text-center">
+                        <i class="bi bi-people-fill"></i><br>
+                        <h5>Expert Instruction</h5>
+                        <a>Find the right instructor for you </a>
+                    </div>
+
+                    <div class="col-4 text-white text-center">
+                        <i class="bi bi-clock-history"></i><br>
+                        <h5>Lifetime Access</h5>
+                        <a>Learn on your schedule</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+<!--
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        
+        <ol class="carousel-indicators">
+            <li data-bs-target="#carouselExampleControls" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#carouselExampleControls" data-bs-slide-to="1"></li>
+            <li data-bs-target="#carouselExampleControls" data-bs-slide-to="2"></li>
+            <li data-bs-target="#carouselExampleControls" data-bs-slide-to="3"></li>
+            
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="gallery">
+                    <div class="card-body pt-3">
+                        <a target="_blank" href="img_5terre.jpg">
+                            
+                        </a>
+                        <h5 class="card-title text-center pb-3">Introduction to HTML and CSS</h5>
+    
+                        <div class="d-flex align-items-center pt-3 pb-3 ">
+                            <i class="bi bi-clock-history me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="This is a star"></i> 2h 30m
+                        </div>
+    
+                    </div>
+                    <div class="card-footer d-flex justify-content-between ">
+                        <div>
+                            <i class="bi bi-person-circle me-2 " data-bs-toggle="tooltip" data-bs-placement="top" title="This is a star"></i>
+                            <span class="col-6 text-start">Hannah Lim</span>
+                        </div>
+                        <div>
+                            
+                            <i class="bi bi-bookmark-fill text-end " data-bs-toggle="tooltip" data-bs-placement="top" title="This is a star"></i>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+
+            <div class="carousel-item">
+                <div class="gallery ">
+                    <div class="card-body pt-3">
+                        <a target="_blank" href="img_5terre.jpg">
+                            
+                        </a>
+                        <h5 class="card-title text-center pb-3">User Experience and Interface Design</h5>
+                        <div class="d-flex align-items-center pt-3 pb-3">
+                            <i class="bi bi-clock-history me-2"></i> 2h 45m
+                        </div>
+                    </div>
+    
+                    <div class="card-footer d-flex justify-content-between ">
+                        <div>
+                            <i class="bi bi-person-circle me-2 "></i>
+                            <span class="col-6 text-start">Julia Lee</span>
+                        </div>
+                        <div>
+                            <i class="bi bi-bookmark-fill text-end "></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="carousel-item">
+                <div class="gallery">
+                    <div class="card-body pt-3">
+                        <a target="_blank" href="img_5terre.jpg">
+                            
+                        </a>
+                        <h5 class="card-title text-center pb-3">iOS App Development using Xcode and Swift</h5>
+                        <div class="d-flex align-items-center pt-3 pb-3 p-2">
+                            <i class="bi bi-clock-history me-2"></i>4h 30m
+                        </div>
+                    </div>
+    
+    
+                    <div class="card-footer d-flex justify-content-between ">
+                        <div>
+                            <i class="bi bi-person-circle me-2 "></i>
+                            <span class="col-6 text-start">Ryan Low</span>
+                        </div>
+    
+                        <div>
+                            <i class="bi bi-bookmark-fill text-end "></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="gallery">
+                    <div class="card-body pt-3">
+                        <a target="_blank" href="img_5terre.jpg">
+                            
+                        </a>
+                        <h5 class="card-title text-center pb-3">Front-end JavaScript Frameworks</h5>
+                        <div class="d-flex align-items-center pt-3 pb-3">
+                            <i class="bi bi-clock-history me-2"></i>2h 45m
+                        </div>
+                    </div>
+    
+    
+                    <div class="card-footer d-flex justify-content-between ">
+                        <div>
+                            <i class="bi bi-person-circle me-2 "></i>
+                            <span class="col-6 text-start">Azhar Kamar</span>
+                        </div>
+    
+                        <div>
+                            <i class="bi bi-bookmark-fill text-end "></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+
+
+
+    image links
+<img src="https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?w=996&t=st=1700666467~exp=1700667067~hmac=ec68be7eca560b9e252d1c0090ef328c662513d5eaab3961698e23e176858381"
+                                alt="Cinque Terre" width="600" height="400">
+
+<img src="https://images.pexels.com/photos/326518/pexels-photo-326518.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                alt="Cinque Terre" width="600" height="400">
+
+<img src="https://img.freepik.com/free-vector/gradient-ui-ux-background_23-2149065783.jpg?w=996&t=st=1700666553~exp=1700667153~hmac=3a70b784629fc2e11e6c8446d14031a9e86fbfc418477d0c4019e7803ca780b6"
+                                alt="Cinque Terre" width="600" height="400">
+<img src="https://images.pexels.com/photos/11813187/pexels-photo-11813187.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                alt="Cinque Terre" width="600" height="400">
+
+                            -->
+
+
+
+
+    <div class="container pt-5 pb-5">
+        <h3 class="pt-5 pb-3">Featured Courses</h3>
+        <hr>
+        <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <!-- Card 1 -->
+                        <div class="col-md-3 mx-auto">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Introduction to HTML and CSS</h5>
+                                    <img src="https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?w=996&t=st=1700666467~exp=1700667067~hmac=ec68be7eca560b9e252d1c0090ef328c662513d5eaab3961698e23e176858381"
+                                        alt="Cinque Terre" width="250" height="250">
+                                        <div class="d-flex align-items-center pt-3 pb-3 ">
+                                            <i class="bi bi-clock-history me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="This is a star"></i> 2h 30m
+                                        </div>
+                                    
+                                        <div class="card-footer d-flex justify-content-between ">
+                                            <div>
+                                                <i class="bi bi-person-circle me-2 " ></i>
+                                                <span class="col-6 text-start">Hannah Lim</span>
+                                            </div>
+                                            <div>
+                                                
+                                                <i class="bi bi-bookmark-fill text-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark"></i>
+                                                
+                                            </div>
+                                        </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Repeat the structure for Card 2, Card 3, and Card 4 -->
+                        <!-- ... -->
+                        <div class="col-md-3 mx-auto">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">User Experience and Interface Design</h5>
+                                    <img src="https://images.pexels.com/photos/326518/pexels-photo-326518.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                        alt="Cinque Terre" width="250" height="250">
+                                        <div class="d-flex align-items-center pt-3 pb-3 ">
+                                            <i class="bi bi-clock-history me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="This is a star"></i> 2h 45m
+                                        </div>
+                                    
+
+                                        <div class="card-footer d-flex justify-content-between ">
+                                            <div>
+                                                <i class="bi bi-person-circle me-2 " ></i>
+                                                <span class="col-6 text-start">Julia Lee</span>
+                                            </div>
+                                            <div>
+                                                
+                                                <i class="bi bi-bookmark-fill text-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark"></i>
+                                                
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mx-auto ">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">iOS App Development using Xcode and Swift</h5>
+                                    <img src="https://img.freepik.com/free-vector/gradient-ui-ux-background_23-2149065783.jpg?w=996&t=st=1700666553~exp=1700667153~hmac=3a70b784629fc2e11e6c8446d14031a9e86fbfc418477d0c4019e7803ca780b6"
+                                        alt="Cinque Terre" width="250" height="250">
+                                        <div class="d-flex align-items-center pt-3 pb-3 ">
+                                            <i class="bi bi-clock-history me-2" ></i> 4h 30m
+                                        </div>
+                                    
+
+                                        <div class="card-footer d-flex justify-content-between ">
+                                            <div>
+                                                <i class="bi bi-person-circle me-2 " ></i>
+                                                <span class="col-6 text-start">Ryan Low</span>
+                                            </div>
+                                            <div>
+                                                
+                                                <i class="bi bi-bookmark-fill text-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark"></i>
+                                                
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mx-auto ">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Front-end JavaScript Frameworks</h5>
+                                    <img src="https://images.pexels.com/photos/11813187/pexels-photo-11813187.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                        alt="Cinque Terre" width="250" height="250">
+                                        <div class="d-flex align-items-center pt-3 pb-3 ">
+                                            <i class="bi bi-clock-history me-2" ></i> 2h 45m
+                                        </div>
+                                    
+                                        <div class="card-footer d-flex justify-content-between ">
+                                            <div>
+                                                <i class="bi bi-person-circle me-2 " ></i>
+                                                <span class="col-6 text-start">Azhar Kumar</span>
+                                            </div>
+                                            <div>
+                                                
+                                                <i class="bi bi-bookmark-fill text-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark"></i>
+                                                
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item ">
+                    <div class="row">
+                        <!-- Card 1 -->
+                        <div class="col-md-3 mx-auto">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Introduction to HTML and CSS</h5>
+                                    <img src="https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?w=996&t=st=1700666467~exp=1700667067~hmac=ec68be7eca560b9e252d1c0090ef328c662513d5eaab3961698e23e176858381"
+                                        alt="Cinque Terre" width="250" height="250">
+                                        <div class="d-flex align-items-center pt-3 pb-3 ">
+                                            <i class="bi bi-clock-history me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="This is a star"></i> 2h 30m
+                                        </div>
+                                    
+                                        <div class="card-footer d-flex justify-content-between ">
+                                            <div>
+                                                <i class="bi bi-person-circle me-2 " ></i>
+                                                <span class="col-6 text-start">Hannah Lim</span>
+                                            </div>
+                                            <div>
+                                                
+                                                <i class="bi bi-bookmark-fill text-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark"></i>
+                                                
+                                            </div>
+                                        </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Repeat the structure for Card 2, Card 3, and Card 4 -->
+                        <!-- ... -->
+                        <div class="col-md-3 mx-auto">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">User Experience and Interface Design</h5>
+                                    <img src="https://images.pexels.com/photos/326518/pexels-photo-326518.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                        alt="Cinque Terre" width="250" height="250">
+                                        <div class="d-flex align-items-center pt-3 pb-3 ">
+                                            <i class="bi bi-clock-history me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="This is a star"></i> 2h 45m
+                                        </div>
+                                    
+
+                                        <div class="card-footer d-flex justify-content-between ">
+                                            <div>
+                                                <i class="bi bi-person-circle me-2 " ></i>
+                                                <span class="col-6 text-start">Julia Lee</span>
+                                            </div>
+                                            <div>
+                                                
+                                                <i class="bi bi-bookmark-fill text-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark"></i>
+                                                
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mx-auto ">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">iOS App Development using Xcode and Swift</h5>
+                                    <img src="https://img.freepik.com/free-vector/gradient-ui-ux-background_23-2149065783.jpg?w=996&t=st=1700666553~exp=1700667153~hmac=3a70b784629fc2e11e6c8446d14031a9e86fbfc418477d0c4019e7803ca780b6"
+                                        alt="Cinque Terre" width="250" height="250">
+                                        <div class="d-flex align-items-center pt-3 pb-3 ">
+                                            <i class="bi bi-clock-history me-2" ></i> 4h 30m
+                                        </div>
+                                    
+
+                                        <div class="card-footer d-flex justify-content-between ">
+                                            <div>
+                                                <i class="bi bi-person-circle me-2 " ></i>
+                                                <span class="col-6 text-start">Ryan Low</span>
+                                            </div>
+                                            <div>
+                                                
+                                                <i class="bi bi-bookmark-fill text-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark"></i>
+                                                
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mx-auto ">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Front-end JavaScript Frameworks</h5>
+                                    <img src="https://images.pexels.com/photos/11813187/pexels-photo-11813187.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                        alt="Cinque Terre" width="250" height="250">
+                                        <div class="d-flex align-items-center pt-3 pb-3 ">
+                                            <i class="bi bi-clock-history me-2" ></i> 2h 45m
+                                        </div>
+                                    
+                                        <div class="card-footer d-flex justify-content-between ">
+                                            <div>
+                                                <i class="bi bi-person-circle me-2 " ></i>
+                                                <span class="col-6 text-start">Azhar Kumar</span>
+                                            </div>
+                                            <div>
+                                                
+                                                <i class="bi bi-bookmark-fill text-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Bookmark"></i>
+                                                
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+    </div>
+    
+  <!--    <div class="responsive">
+            <div class="gallery">
+                <div class="card-body pt-3">
+                    <a target="_blank" href="img_5terre.jpg">
+                        <img src="https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?w=996&t=st=1700666467~exp=1700667067~hmac=ec68be7eca560b9e252d1c0090ef328c662513d5eaab3961698e23e176858381"
+                            alt="Cinque Terre" width="600" height="400">
+                    </a>
+                    <h5 class="card-title text-center pb-3">Introduction to HTML and CSS</h5>
+
+                    <div class="d-flex align-items-center pt-3 pb-3 ">
+                        <i class="bi bi-clock-history me-2"></i> 2h 30m
+                    </div>
+
+                </div>
+                <div class="card-footer d-flex justify-content-between ">
+                    <div>
+                        <i class="bi bi-person-circle me-2 "></i>
+                        <span class="col-6 text-start">Hannah Lim</span>
+                    </div>
+                    <div>
+                        <i class="bi bi-bookmark-fill text-end "></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery ">
+                <div class="card-body pt-3">
+                    <a target="_blank" href="img_5terre.jpg">
+                        <img src="https://images.pexels.com/photos/326518/pexels-photo-326518.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="Cinque Terre" width="600" height="400">
+                    </a>
+                    <h5 class="card-title text-center pb-3">User Experience and Interface Design</h5>
+                    <div class="d-flex align-items-center pt-3 pb-3">
+                        <i class="bi bi-clock-history me-2"></i> 2h 45m
+                    </div>
+                </div>
+
+                <div class="card-footer d-flex justify-content-between ">
+                    <div>
+                        <i class="bi bi-person-circle me-2 "></i>
+                        <span class="col-6 text-start">Julia Lee</span>
+                    </div>
+                    <div>
+                        <i class="bi bi-bookmark-fill text-end "></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="responsive">
+            <div class="gallery">
+                <div class="card-body pt-3">
+                    <a target="_blank" href="img_5terre.jpg">
+                        <img src="https://img.freepik.com/free-vector/gradient-ui-ux-background_23-2149065783.jpg?w=996&t=st=1700666553~exp=1700667153~hmac=3a70b784629fc2e11e6c8446d14031a9e86fbfc418477d0c4019e7803ca780b6"
+                            alt="Cinque Terre" width="600" height="400">
+                    </a>
+                    <h5 class="card-title text-center pb-3">iOS App Development using Xcode and Swift</h5>
+                    <div class="d-flex align-items-center pt-3 pb-3 p-2">
+                        <i class="bi bi-clock-history me-2"></i>4h 30m
+                    </div>
+                </div>
+
+
+                <div class="card-footer d-flex justify-content-between ">
+                    <div>
+                        <i class="bi bi-person-circle me-2 "></i>
+                        <span class="col-6 text-start">Ryan Low</span>
+                    </div>
+
+                    <div>
+                        <i class="bi bi-bookmark-fill text-end "></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="responsive">
+            <div class="gallery">
+                <div class="card-body pt-3">
+                    <a target="_blank" href="img_5terre.jpg">
+                        <img src="https://images.pexels.com/photos/11813187/pexels-photo-11813187.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="Cinque Terre" width="600" height="400">
+                    </a>
+                    <h5 class="card-title text-center pb-3">Front-end JavaScript Frameworks</h5>
+                    <div class="d-flex align-items-center pt-3 pb-3">
+                        <i class="bi bi-clock-history me-2"></i>2h 45m
+                    </div>
+                </div>
+
+
+                <div class="card-footer d-flex justify-content-between ">
+                    <div>
+                        <i class="bi bi-person-circle me-2 "></i>
+                        <span class="col-6 text-start">Azhar Kamar</span>
+                    </div>
+
+                    <div>
+                        <i class="bi bi-bookmark-fill text-end "></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    -->
+
+
+
+
+    <div class="container">
+        <div class="container">
+            <div class="row p-2  ">
+                <hr>
+                <div style="display: inline-block;" class="justify-content-between">
+                    <div>
+                        <span class="text-start">&copy;2023 SOI Learning Portal. All Rights Reserved.</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>
